@@ -1,6 +1,7 @@
 # Vue 3 Component for Address Completion
 
-This is a Vue 3 Component for Address Completion. It integrates with [Bootstrap 5](https://getbootstrap.com) and [Mapbox Geocoding API](ttps://docs.mapbox.com/api/search/geocoding/).
+This is a Vue 3 [Component for Address Completion](/src/components). It integrates with [Bootstrap 5](https://getbootstrap.com) and 
+[Mapbox Geocoding API](https://docs.mapbox.com/api/search/geocoding/).
 It is based on Evgeny Sorokin's [bootstrap-5-autocomplete](https://github.com/gch1p/bootstrap-5-autocomplete)
 
 ## Demo
@@ -8,7 +9,6 @@ It is based on Evgeny Sorokin's [bootstrap-5-autocomplete](https://github.com/gc
 
 
 ## Recommended IDE Setup
-
 - [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
 ### Run the project
