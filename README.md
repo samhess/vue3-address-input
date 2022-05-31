@@ -13,7 +13,7 @@ v-model contains the current value of the field (what was typed or selected).
 Additionally with the *@address* custom event, an object containing postcode, city and state can be reveived. 
 
 ## Demo
-[Demo](https://samhess.github.io/vue3-bs5-autocomplete/index.html) is hosted on GitHub Pages ([docs](/docs) directory)
+[Demo](https://samhess.github.io/vue3-address-input/index.html) is hosted on GitHub Pages ([docs](/docs) directory)
 
 ## Recommended IDE Setup
 - [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
