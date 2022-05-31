@@ -1,6 +1,6 @@
 <template>
   <input type="text" class="form-control" :value="props.modelValue" @input="searchAddress"/>
-    <ul ref="dropdownMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <ul ref="dropdownMenu" class="dropdown-menu">
       <li v-for="suggestion in suggestions">
         <a class="dropdown-item" href="#" @click="selectAddress(suggestion)" :value="suggestion.value">
           {{formatLabel(suggestion.label,'start')}}<span class="text-primary">{{formatLabel(suggestion.label,'middle')}}</span>{{formatLabel(suggestion.label, 'end')}}
