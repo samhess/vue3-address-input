@@ -1,19 +1,20 @@
 {
-  "name": "vue3-address-input",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@samhess/vue-address-input",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/AddressInput.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@popperjs/core": "^2.11.5",
-    "bootstrap": "^5.1.3",
-    "vue": "^3.2.25"
-  },
+  "keywords": [],
+  "author": "Samuel Hess",
+  "license": "ISC",
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "^2.9.9"
+    "rollup": "^2.75.5",
+    "rollup-plugin-vue": "^6.0.0"
   }
 }

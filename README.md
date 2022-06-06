@@ -1,9 +1,10 @@
 # Vue 3 Component for Address Completion
 
-This is a [Vue 3 Component](/src/components) for address autocompletion. It integrates with 
+This is a [Vue 3 Component](/src) for address autocompletion. It integrates with 
 [Mapbox Geocoding API](https://docs.mapbox.com/api/search/geocoding/) and [Bootstrap 5](https://getbootstrap.com).
 
-A current build (normally in /dist) can be found in the directory /docs so it can be served on GitHub Pages .
+A current build of the component library can be found in the *dist* directory.
+A current build of the example app can be found in the *docs* directory so it can be served on GitHub Pages.
 
 ## Usage 
 ```html
