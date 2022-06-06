@@ -2,7 +2,7 @@
   <input type="text" class="form-control" :value="props.modelValue" @input="searchAddress"/>
     <ul ref="dropdownMenu" class="dropdown-menu">
       <li v-for="suggestion in suggestions">
-        <a class="dropdown-item" href="#" @click="selectAddress(suggestion)" :value="suggestion.value">
+        <a class="dropdown-item" href="#" @click="selectAddress(suggestion)">
           {{formatLabel(suggestion.label,'start')}}<span class="text-primary">{{formatLabel(suggestion.label,'middle')}}</span>{{formatLabel(suggestion.label, 'end')}}
         </a> 
       </li>
@@ -11,15 +11,31 @@
 
 <script setup>
   import { reactive, ref } from 'vue' 
-  const provider = 'https://api.mapbox.com/geocoding/v5/mapbox.places'
-  const token = 'pk.eyJ1Ijoic2FtaGVzcyIsImEiOiJjbDJhYXFpYTUwM21iM2tzMXo2ejg5YWltIn0.klumhVZ4oeembZPkcgtJ6g'
+  // mapbox options as per https://docs.mapbox.com/api/search/geocoding/
+  const mapboxOptions = {
+    api: 'https://api.mapbox.com/geocoding/v5/',
+    endpoint: 'mapbox.places',
+    access_token: 'pk.eyJ1Ijoic2FtaGVzcyIsImEiOiJjbDJhYXFpYTUwM21iM2tzMXo2ejg5YWltIn0.klumhVZ4oeembZPkcgtJ6g',
+    limit: 5,
+    types: 'address',
+    proximity: 'ip',
+    autocomplete: true,
+    fuzzyMatch: true,
+    language: 'en'
+  }
   const dropdownMenu = ref()
   const suggestions = reactive([])
 
-  const emit = defineEmits(['address','update:modelValue'])
-  const props = defineProps({modelValue : String})
+  const emit = defineEmits(['addressSelect','update:modelValue'])
+  const props = defineProps({
+    modelValue : String,
+    mapboxOptions : Object
+  })
+  Object.assign(mapboxOptions, props.mapboxOptions)
+
 
   function formatLabel(label, part) {
+    console.log(label)
     let index = label.toLowerCase().indexOf(props.modelValue.toLowerCase())
     if (index >= 0) {
       let text = ''
@@ -56,48 +72,41 @@
     }
   }
 
-  function selectAddress(suggestion) {
+  function selectAddress(address) {
+    // hide dropdown menu
     dropdownMenu.value.classList.remove('show')
-    let {label, value} = suggestion
-    let address = {}
-    if (label.indexOf(', ')) {
-      let addressParts = label.split(', ')
-      address.street = addressParts[0]
-      let pos = addressParts[1].indexOf(' ')
-      address.postcode = addressParts[1].slice(0, pos)
-      address.city = addressParts[1].slice(pos+1)
-      address.state = value.split('-')[1]
-      // update the value of the input field to what was selected
-      emit('update:modelValue', address.street)
-      // send address to parent component
-      emit('address', address)
-    } else {
-      console.log(`Error: invalid format ${label}`)
-    }
+    // update the value of the input field to what was selected
+    emit('update:modelValue', address.street)
+    // send address to parent component
+    emit('addressSelect', address)
   }
 
   async function geoCode(street) {
     if (street.length >= 2) {
       let searchtext = encodeURIComponent(street)
-      let query = {
-        access_token : token,
-        limit : 10,
-        types : 'address',
-        proximity : 'ip',
-        autocomplete: true,
-        fuzzyMatch: true,
-        // country : 'CH',
-
-      }
+      let {api, endpoint, ...query} = mapboxOptions
       let queryString = new URLSearchParams(query).toString()
-      let request = new Request(`${provider}/${searchtext}.json?${queryString}`)
+      let request = new Request(`${api+endpoint}/${searchtext}.json?${queryString}`)
       let response = await fetch(request)
       let data = await response.json()
-      let addresses = data.features.map(el => ({
-          label: el.place_name,
-          value: el.context[el.context.length-2].short_code
-        }))
-      return addresses
+      if (data.features) {
+        let addresses = data.features.map(address => {
+          let label = address.place_name
+          let location = label.split(', ')[1]
+          return {
+            label: label,
+            street: label.split(', ')[0],
+            postcode: location.slice(0, location.indexOf(' ')),
+            city: location.slice(1+location.indexOf(' ')),
+            state: address.context.at(-2).text,
+            country: address.context.at(-1).text
+          }
+        })
+        console.log(addresses)
+        return addresses
+      } else {
+        console.log(data.message)
+      }
     }
   }
 </script>

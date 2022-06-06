@@ -1,14 +1,3 @@
-<script setup>
-  import { reactive } from 'vue'
-  import AddressInput from './components/AddressInput.vue'
-  const editedItem = reactive({})
-  function autoComplete(place) {
-    editedItem.postcode = place.postcode
-    editedItem.city = place.city 
-    editedItem.state = place.state 
-  }
-</script>
-
 <template>
   <nav class="navbar bg-secondary">
   </nav>
@@ -21,7 +10,7 @@
       <div class="row g-3">
         <div class="col-md-3 mb-2">
           <label class="form-label" for="street">Street</label>
-          <AddressInput @address="autoComplete" v-model="editedItem.street"></AddressInput>
+          <AddressInput @addressSelect="getAddress" :mapboxOptions="mapboxOptions" v-model="editedItem.street"></AddressInput>
         </div>
       </div>
       <div class="row g-3">
@@ -37,6 +26,10 @@
           <label class="form-label" for="state">State</label>
           <input class="form-control" v-model="editedItem.state"/>
         </div>
+        <div class="col-md-2 mb-2">
+          <label class="form-label" for="state">Country</label>
+          <input class="form-control" v-model="editedItem.country"/>
+        </div>
       </div>
     </form>
   </main>
@@ -49,3 +42,17 @@
   </footer>
 </template>
 
+<script setup>
+  import { reactive } from 'vue'
+  import AddressInput from './components/AddressInput.vue'
+  const editedItem = reactive({})
+  // mapbox options as per https://docs.mapbox.com/api/search/geocoding
+  const mapboxOptions = {
+    access_token : 'pk.eyJ1Ijoic2FtaGVzcyIsImEiOiJjbDJhYXFpYTUwM21iM2tzMXo2ejg5YWltIn0.klumhVZ4oeembZPkcgtJ6g',
+    limit : 10,
+    language: 'de'
+  }
+  function getAddress(address) {
+    Object.assign(editedItem,address)
+  }
+</script>
