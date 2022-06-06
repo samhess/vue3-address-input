@@ -1,5 +1,5 @@
 <template>
-  <input type="text" class="form-control" :value="props.modelValue" @input="searchAddress"/>
+  <input type="text" class="form-control" v-model="searchtext" @input="searchAddress"/>
     <ul ref="dropdownMenu" class="dropdown-menu">
       <li v-for="suggestion in suggestions">
         <a class="dropdown-item" href="#" @click="selectAddress(suggestion)">
@@ -15,7 +15,7 @@
   const mapboxOptions = {
     api: 'https://api.mapbox.com/geocoding/v5/',
     endpoint: 'mapbox.places',
-    access_token: 'pk.eyJ1Ijoic2FtaGVzcyIsImEiOiJjbDJhYXFpYTUwM21iM2tzMXo2ejg5YWltIn0.klumhVZ4oeembZPkcgtJ6g',
+    access_token: '',
     limit: 5,
     types: 'address',
     proximity: 'ip',
@@ -24,19 +24,18 @@
     language: 'en'
   }
   const dropdownMenu = ref()
+  var searchtext = ref('')
   const suggestions = reactive([])
 
-  const emit = defineEmits(['addressSelect','update:modelValue'])
+  const emit = defineEmits(['addressSelect'])
   const props = defineProps({
-    modelValue : String,
     mapboxOptions : Object
   })
   Object.assign(mapboxOptions, props.mapboxOptions)
 
 
   function formatLabel(label, part) {
-    console.log(label)
-    let index = label.toLowerCase().indexOf(props.modelValue.toLowerCase())
+    let index = label.toLowerCase().indexOf(searchtext.value.toLowerCase())
     if (index >= 0) {
       let text = ''
       switch (part) {
@@ -44,13 +43,13 @@
           text = label.substring(0,index)
           break
         case 'middle': 
-          text = label.substring(index, index + props.modelValue.length)
+          text = label.substring(index, index + searchtext.value.length)
           break
         case 'end': 
-          text = label.substring(index + props.modelValue.length)
+          text = label.substring(index + searchtext.value.length)
           break
       }
-      // console.log(`Found ${props.modelValue} in ${label} at pos ${index} and ${part} part is ${text}`);
+      // console.log(`Found ${searchtext.value} in ${label} at pos ${index} and ${part} part is ${text}`);
       return text
     } else if (part === 'start') {
       return label
@@ -59,13 +58,10 @@
     }
   }
 
-  async function searchAddress(event) {
-    let search = event.target.value
-    // update the value of the input field to what was typed
-    emit('update:modelValue', search)
-    if (search.length >= 2) {
+  async function searchAddress() {
+    if (searchtext.value.length >= 2) {
       suggestions.length = 0
-      Object.assign(suggestions, await geoCode(search))
+      Object.assign(suggestions, await geoCode(searchtext.value))
       dropdownMenu.value.classList.add('show')
     } else {
       dropdownMenu.value.classList.remove('show')
@@ -76,7 +72,7 @@
     // hide dropdown menu
     dropdownMenu.value.classList.remove('show')
     // update the value of the input field to what was selected
-    emit('update:modelValue', address.street)
+    searchtext.value = address.street
     // send address to parent component
     emit('addressSelect', address)
   }
@@ -102,7 +98,6 @@
             country: address.context.at(-1).text
           }
         })
-        console.log(addresses)
         return addresses
       } else {
         console.log(data.message)

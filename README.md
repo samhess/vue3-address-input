@@ -42,7 +42,6 @@ A current build (normally in /dist) can be found in the directory /docs so it ca
 | mapboxOptions.fuzzyMatch   | Boolean|                                    | No       | true    |
 | mapboxOptions.country      | String |                                    | No       | null    |
 | mapboxOptions.language     | String |                                    | No       | 'en'    |
-| v-model                    | String | Current value of the input field   | No       | null    |
 
 Please refer to [Mapbox Geocoding API documentation](https://docs.mapbox.com/api/search/geocoding) for further information
 

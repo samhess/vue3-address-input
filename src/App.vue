@@ -10,7 +10,7 @@
       <div class="row g-3">
         <div class="col-md-3 mb-2">
           <label class="form-label" for="street">Street</label>
-          <AddressInput @addressSelect="getAddress" :mapboxOptions="mapboxOptions" v-model="editedItem.street"></AddressInput>
+          <AddressInput @addressSelect="getAddress" :mapboxOptions="mapboxOptions"></AddressInput>
         </div>
       </div>
       <div class="row g-3">
@@ -36,7 +36,7 @@
   <br>
   <footer class="footer mt-auto py-4 bg-light">
     <div class="container d-flex justify-content-between">
-      <span class="text-primary">Vue 3 Address Autocomplete Component</span>
+      <span class="text-primary">Vue Address Autocomplete Component</span>
       <span class="text-primary">&copy; 2022 Samuel Hess</span>
     </div>
   </footer>
