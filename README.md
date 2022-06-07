@@ -6,6 +6,10 @@ This is a [Vue 3 Component](/src) for address autocompletion. It integrates with
 A current build of the component library can be found in the *dist* directory.
 A current build of the example app can be found in the *docs* directory so it can be served on GitHub Pages.
 
+## Installation
+```bash
+npm install @samhess/vue-address-input```
+
 ## Usage 
 ```html
 <template>
@@ -14,7 +18,9 @@ A current build of the example app can be found in the *docs* directory so it ca
 
 <script setup>
   import { reactive } from 'vue'
-  import AddressInput from './components/AddressInput.vue'
+  // import AddressInput from './components/AddressInput.vue'
+  // import AddressInput from '../lib/AddressInput.js'
+  import AddressInput from '@samhess/vue-address-input'
   const editedItem = reactive({})
   // mapbox options as per https://docs.mapbox.com/api/search/geocoding
   const mapboxOptions = {
@@ -51,10 +57,3 @@ Please refer to [Mapbox Geocoding API documentation](https://docs.mapbox.com/api
 | Event | Description |
 | :---: | :---------: |
 | **@addressSelect** | Triggered when user selects address. Returns object with selected address containing street, postcode, city state and country |
-
-## Recommended IDE Setup
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
-
-### Run the project
-- `npm i`
-- `npm run dev` or `npm run build`

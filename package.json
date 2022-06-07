@@ -1,16 +1,21 @@
 {
   "name": "@samhess/vue-address-input",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Vue address input field with Mapbox and Bootstrap integration",
   "main": "dist/AddressInput.js",
   "files": [
     "dist/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samhess/vue3-address-input.git"
+  },
+  "homepage": "https://github.com/samhess/vue3-address-input",
   "scripts": {
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["automplete", "mapbox", "vue3", "bootstrap5", "sfc"],
   "author": "Samuel Hess",
   "license": "ISC",
   "devDependencies": {
