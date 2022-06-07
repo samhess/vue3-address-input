@@ -1,6 +1,6 @@
-# Vue 3 Component for Address Completion
+# Vue Component for Address Completion
 
-This is a Vue 3 component (SFC) for address autocompletion. It integrates with 
+This is a Vue 3 Single File Components (SFC) for address autocompletion. It integrates with 
 [Mapbox Geocoding API](https://docs.mapbox.com/api/search/geocoding/) and [Bootstrap 5](https://getbootstrap.com).
 
 A current build of the component can be found in the *dist* directory.
@@ -43,13 +43,13 @@ npm install @samhess/vue-address-input
 
 | Property      | Subproperty   | Type    | Description                        | Required | Default |
 | :------:      | :-------:     | :---:   | :---------:                        | :------: | :-----: |
-| mapboxOptions |               | Object  | Mapbox options as indicated below  | Yes      | []      |
-|               | .access_token | String  | Mapbox access token                | Yes      | null    |
+| mapboxOptions |               | Object  | Mapbox options as indicated below  | Yes      |         |
+|               | .access_token | String  | Mapbox access token                | Yes      | ''      |
 |               | .limit        | String  | Limit of suggestions               | No       | 10      |
-|               | .proximity    | String  | Search ne                          | No       |'ip'     |
+|               | .proximity    | String  | Search near                        | No       |'ip'     |
 |               | .autocomplete | Boolean | Autocomplete search input          | No       | true    |
 |               | .fuzzyMatch   | Boolean | Not only exact match               | No       | true    |
-|               | .country      | String  | Limit to certain countries         | No       | null    |
+|               | .country      | String  | Limit to certain countries         | No       | ''   |
 |               | .language     | String  | Language for search and results    | No       | 'en'    |
 
 Please refer to [Mapbox Geocoding API documentation](https://docs.mapbox.com/api/search/geocoding) for further information
