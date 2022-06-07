@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [vue()],
   base : '/vue3-address-input/',
   build: {
-    outDir: 'docs'
+    outDir: '../docs'
   }
 })
