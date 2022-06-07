@@ -1,14 +1,16 @@
 # Vue 3 Component for Address Completion
 
-This is a [Vue 3 Component](/src) for address autocompletion. It integrates with 
+This is a Vue 3 component (SFC) for address autocompletion. It integrates with 
 [Mapbox Geocoding API](https://docs.mapbox.com/api/search/geocoding/) and [Bootstrap 5](https://getbootstrap.com).
 
-A current build of the component library can be found in the *dist* directory.
+A current build of the component can be found in the *dist* directory.
+
 A current build of the example app can be found in the *docs* directory so it can be served on GitHub Pages.
 
 ## Installation
 ```bash
-npm install @samhess/vue-address-input```
+npm install @samhess/vue-address-input
+```
 
 ## Usage 
 ```html
@@ -19,7 +21,7 @@ npm install @samhess/vue-address-input```
 <script setup>
   import { reactive } from 'vue'
   // import AddressInput from './components/AddressInput.vue'
-  // import AddressInput from '../lib/AddressInput.js'
+  // import AddressInput from './components/AddressInput.js'
   import AddressInput from '@samhess/vue-address-input'
   const editedItem = reactive({})
   // mapbox options as per https://docs.mapbox.com/api/search/geocoding
@@ -39,16 +41,16 @@ npm install @samhess/vue-address-input```
 
 ## Properties
 
-| Property                   | Type   | Description                        | Required | Default |
-| :------:                   | :---:  | :---------:                        | :------: | :-----: |
-| mapboxOptions              | Object | Mapbox options as indicated below  | Yes      | []      |
-| mapboxOptions.access_token | String | Mapbox access token                | Yes      | null    |
-| mapboxOptions.limit        | String | Limit of suggestions               | No       | 10      |
-| mapboxOptions.proximity    | String |                                    | No       |'ip'     |
-| mapboxOptions.autocomplete | Boolean|                                    | No       | true    |
-| mapboxOptions.fuzzyMatch   | Boolean|                                    | No       | true    |
-| mapboxOptions.country      | String |                                    | No       | null    |
-| mapboxOptions.language     | String |                                    | No       | 'en'    |
+| Property      | Subproperty   | Type    | Description                        | Required | Default |
+| :------:      | :-------:     | :---:   | :---------:                        | :------: | :-----: |
+| mapboxOptions |               | Object  | Mapbox options as indicated below  | Yes      | []      |
+|               | .access_token | String  | Mapbox access token                | Yes      | null    |
+|               | .limit        | String  | Limit of suggestions               | No       | 10      |
+|               | .proximity    | String  | Search ne                          | No       |'ip'     |
+|               | .autocomplete | Boolean | Autocomplete search input          | No       | true    |
+|               | .fuzzyMatch   | Boolean | Not only exact match               | No       | true    |
+|               | .country      | String  | Limit to certain countries         | No       | null    |
+|               | .language     | String  | Language for search and results    | No       | 'en'    |
 
 Please refer to [Mapbox Geocoding API documentation](https://docs.mapbox.com/api/search/geocoding) for further information
 

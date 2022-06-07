@@ -45,7 +45,7 @@
 <script setup>
   import { reactive } from 'vue'
   // import AddressInput from './components/AddressInput.vue'
-  // import AddressInput from '../lib/AddressInput.js'
+  // import AddressInput from './components/AddressInput.js'
   import AddressInput from '@samhess/vue-address-input'
   const editedItem = reactive({})
   // mapbox options as per https://docs.mapbox.com/api/search/geocoding
